@@ -9,4 +9,5 @@ import com.javaweb.model.UserCompany;
 public interface UserCompanyRepository extends JpaRepository<UserCompany, Long>{
 	Optional<UserCompany> findByEmailAndPassword(String email, String password);
 	Optional<UserCompany> findByEmail(String email);
+	Optional<UserCompany> findById(Long id);
 }

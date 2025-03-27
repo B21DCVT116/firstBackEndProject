@@ -1,18 +1,22 @@
 package com.javaweb.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.javaweb.help.generateToken;
+import com.javaweb.model.Job;
 import com.javaweb.model.UserCompany;
 import com.javaweb.repository.UserCompanyRepository;
-
 @RestController
 public class CompanyController {
 
@@ -35,6 +39,7 @@ public class CompanyController {
 	        loginRequest.getPassword()
 	    );
 	    if (user != null) {
+	    	System.out.print(loginRequest.getEmail());
 	        return ResponseEntity.ok(user);
 	     }
 	    return null;
@@ -97,6 +102,25 @@ public class CompanyController {
         } else {
             return ResponseEntity.badRequest().body("Không tìm thấy công ty với ID: " + id);
         }
+    }
+    //Lấy tất cả công ty
+    @GetMapping("/getAllCompany")
+    public ResponseEntity<List<UserCompany>> getAllCompany() {
+        List<UserCompany> company = userCompanyRepository.findAll();
+        if (!company.isEmpty()) {
+            return ResponseEntity.ok(company);
+        }
+        return ResponseEntity.notFound().build();
+    }
+    
+   //Lấy thông tin chi tiết công ty
+    @GetMapping("/getDetailCompany/{id}")
+    public ResponseEntity<Optional<UserCompany>> getDetialCompany(@PathVariable Long id) {
+        Optional<UserCompany> company = userCompanyRepository.findById(id);
+        if (!company.isEmpty()) {
+            return ResponseEntity.ok(company);
+        }
+        return ResponseEntity.notFound().build();
     }
 	
 }

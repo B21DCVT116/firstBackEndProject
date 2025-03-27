@@ -10,9 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.javaweb.model.Job;
-import com.javaweb.model.UserCompany;
-
 @Entity
 @Table(name = "CV")
 
