@@ -1,7 +1,11 @@
 package com.javaweb.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,9 +23,22 @@ public class CV {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-    private String [] city;
+    @ElementCollection
+    @CollectionTable(name = "cv_cities", joinColumns = @JoinColumn(name = "cv_id"))
+    @Column(name = "city")
+    private List<String> city;
+    
+    private String nameCandidate;
 
-    private LocalDateTime createdAt;
+    public String getNameCandidate() {
+		return nameCandidate;
+	}
+
+	public void setNameCandidate(String nameCandidate) {
+		this.nameCandidate = nameCandidate;
+	}
+
+	private LocalDateTime createdAt;
 
     private String description;
 
@@ -43,7 +60,10 @@ public class CV {
     @JoinColumn(name = "id_job", referencedColumnName = "id", nullable = false)
     private Job job;
 
-    private String [] linkProject;
+    @ElementCollection
+    @CollectionTable(name = "cv_link_projects", joinColumns = @JoinColumn(name = "cv_id"))
+    @Column(name = "link_project")
+    private List<String> linkProject;
 
 	public long getId() {
 		return id;
@@ -53,11 +73,11 @@ public class CV {
 		this.id = id;
 	}
 
-	public String[] getCity() {
+	public List<String> getCity() {
 		return city;
 	}
 
-	public void setCity(String[] city) {
+	public void setCity(List<String> city) {
 		this.city = city;
 	}
 
@@ -101,11 +121,11 @@ public class CV {
 		this.job = job;
 	}
 
-	public String[] getLinkProject() {
+	public List<String> getLinkProject() {
 		return linkProject;
 	}
 
-	public void setLinkProject(String[] linkProject) {
+	public void setLinkProject(List<String> linkProject) {
 		this.linkProject = linkProject;
 	}
 

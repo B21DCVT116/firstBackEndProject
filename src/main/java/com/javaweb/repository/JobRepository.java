@@ -58,4 +58,13 @@ public interface JobRepository extends JpaRepository<Job, Long> {
             @Param("cities") List<String> cities,
             @Param("minSalary") Double minSalary
         );
+    
+    
+    
+    
+    @Query("SELECT DISTINCT c FROM Job j JOIN j.city c")
+    List<String> findAllDistinctCities();
+    
+    @Query("SELECT DISTINCT t FROM Job j JOIN j.tag t")
+    List<String> findAllDistinctTags();
 }

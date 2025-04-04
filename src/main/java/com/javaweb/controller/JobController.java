@@ -144,5 +144,18 @@ public class JobController {
     	    List<Job> jobs = jobRepository.searchJobs(name, tags, cities, minSalary);
     	    return jobs.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(jobs);
     	}
+    
+    
+    
+    
+    @GetMapping("/getListTag")
+    public ResponseEntity<List<String>> getListTag() {
+    	    List<String> tag = jobRepository.findAllDistinctTags();
+    	    return tag.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(tag);
+    	}
+    @GetMapping("/getListCity")
+    public ResponseEntity<List<String>> getListCity() {
+    	    List<String> city = jobRepository.findAllDistinctCities();
+    	    return city.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(city);
+    	}
 }
-

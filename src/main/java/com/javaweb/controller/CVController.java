@@ -90,6 +90,8 @@ public class CVController {
     	Optional<Job> job = jobRepository.findById(idJob);   
     	CV newCV = new CV();
     	newCV.setJob(job.get());
+    	newCV.setNameCandidate(cv.getNameCandidate());
+    	newCV.setCity(cv.getCity());
     	newCV.setCompany(job.get().getCompany());
     	newCV.setEmail(cv.getEmail());
     	newCV.setDescription(cv.getDescription());
