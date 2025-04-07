@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.javaweb.help.generateToken;
+import com.javaweb.model.CV;
 import com.javaweb.model.Job;
 import com.javaweb.model.UserCompany;
 import com.javaweb.repository.UserCompanyRepository;
@@ -33,13 +34,13 @@ public class CompanyController {
 	
 	//API đăng nhập
 	@PostMapping("/loginCompany")
-	public ResponseEntity<Optional<UserCompany>> login(@RequestBody UserCompany loginRequest) {
-	    Optional<UserCompany> user = userCompanyRepository.findByEmailAndPassword(
+	public ResponseEntity<UserCompany> login(@RequestBody UserCompany loginRequest) {
+	    Optional<UserCompany> userOpt = userCompanyRepository.findByEmailAndPassword(
 	        loginRequest.getEmail(), 
 	        loginRequest.getPassword()
 	    );
+	    UserCompany user = userOpt.orElse(null);
 	    if (user != null) {
-	    	System.out.print(loginRequest.getEmail());
 	        return ResponseEntity.ok(user);
 	     }
 	    return null;

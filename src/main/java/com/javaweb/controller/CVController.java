@@ -97,6 +97,7 @@ public class CVController {
     	newCV.setDescription(cv.getDescription());
     	newCV.setLinkProject(cv.getLinkProject());
     	newCV.setStatus(false);
+    	newCV.setPhone(cv.getPhone());
     	newCV.setCreatedAt(LocalDateTime.now());
 
     	cvRepository.save(newCV);

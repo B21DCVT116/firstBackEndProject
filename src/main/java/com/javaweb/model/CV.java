@@ -29,8 +29,18 @@ public class CV {
     private List<String> city;
     
     private String nameCandidate;
+    
+    private String phone;
 
-    public String getNameCandidate() {
+    public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getNameCandidate() {
 		return nameCandidate;
 	}
 
