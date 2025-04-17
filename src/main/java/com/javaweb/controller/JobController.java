@@ -59,9 +59,6 @@ public class JobController {
     		@RequestBody Job job
     		){
     	Optional<UserCompany> company = userCompanyRepository.findById(idCompany);
-    	if (company.isPresent()) {
-    		return ResponseEntity.badRequest().body("Thêm công việc thất bại");
-    	}
     	Job newJob = new Job();
     	newJob.setCompany(company.get());
         newJob.setCity(job.getCity());
