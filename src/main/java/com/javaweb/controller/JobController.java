@@ -59,6 +59,10 @@ public class JobController {
     		@RequestBody Job job
     		){
     	Optional<UserCompany> company = userCompanyRepository.findById(idCompany);
+        if(!company.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Không tìm thấy công ty với ID: " + idCompany);
+        }
     	Job newJob = new Job();
     	newJob.setCompany(company.get());
         newJob.setCity(job.getCity());
